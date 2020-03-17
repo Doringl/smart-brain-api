@@ -14,10 +14,8 @@ const profile = require('./controllers/profile');
 const db = knex({
   client: 'pg',
   connection: {
-    host: 'postgresql-colorful-63016',
-    user: 'postgres',
-    password: '',
-    database: 'smart-brain'
+    connectionString: process.env.DATABASE_URL,
+    ssl: true
   }
 });
 
