@@ -26,11 +26,11 @@ App.get('/', (req, res) => {
   res.send('its working');
 });
 
-App.post('./signin', signIn.handleSignIn(db, bcrypt));
-App.post('./register', (req, res) => {
+App.post('/signin', signIn.handleSignIn(db, bcrypt));
+App.post('/register', (req, res) => {
   register.handleRegister(req, res, db, bcrypt);
 });
-App.get('./profile/:id', (req, res) => {
+App.get('/profile/:id', (req, res) => {
   profile.handleProfileGetData(req, res, db, bcrypt);
 });
 App.put('/image', (req, res) => {
