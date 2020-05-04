@@ -6,23 +6,24 @@ const handleSignIn = (db, bcrypt) => (req, res) => {
   db.select('email', 'hash')
     .from('login')
     .where('email', '=', email)
-    .then(data => {
+    .then((data) => {
       const isValid = bcrypt.compareSync(password, data[0].hash);
       if (isValid) {
         return db
           .select('*')
           .from('users')
-          .then(user => {
+          .where('email', '=', email)
+          .then((user) => {
             res.json(user[0]);
           })
-          .catch(error => res.status(400).json('unable to get user data'));
+          .catch((error) => res.status(400).json('unable to get user data'));
       } else {
         res.status(400).json('wrong credentials');
       }
     })
-    .catch(error => res.status(400).json('wrong credentials'));
+    .catch((error) => res.status(400).json('wrong credentials'));
 };
 
 module.exports = {
-  handleSignIn: handleSignIn
+  handleSignIn: handleSignIn,
 };
